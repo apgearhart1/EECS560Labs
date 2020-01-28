@@ -7,75 +7,27 @@
 
 #include <string>
 #include <iostream>
-
+#include "Executive.h"
 #include <fstream>
-
-
-//Executive(){
-//  position = 0;
-
-//}
+#include <typeinfo>
+//cout << typeid(variable).name() << endl;
 
 
 
-void Executive(char* &data)
+Executive::Executive(char* &data)
 {
   int position = 0;
-  int size =0;
   std::ifstream myfile;
   myfile.open(data);
-  std::string str;
-
-  while (myfile>>str) {
-    //myfile>>str;
-    if(str == "NAVIGATE")
-    {
-
-      std::string site = "0";
-      if (position>1&&position<size) {
-        site = "delete";
-
-        myfile>>site;
-
-      }
-      else{
-        myfile>>site;
-
-      }
-
-
-      position++;
-      size++;
+  int point = 0;
+  List = new LinkedList();
+  while (!myfile.eof()) {
+    myfile>>point;
+    if(myfile.eof()){
+      break;
     }
-    else if(str == "BACK")
-    {
+    List->addFront(point);
 
-      if(position > 1)
-      {
-        position--;
-      }
-      else{
-        std::cout << "Already at the front page" << '\n';
-      }
-
-    }
-    else if(str == "FORWARD")
-    {
-
-      if (position < size) {
-        position++;
-      }
-      else{
-        std::cout << "Already at the back page" << '\n';
-      }
-
-    }
-    else if(str == "HISTORY")
-    {
-    }
-    else{
-      std::cout << "COMMAND INVALID" << '\n';
-    }
 
   }
 
@@ -85,7 +37,7 @@ void Executive(char* &data)
 
 
 
-void run(){
+void Executive::run(){
 
     int choice = 0;
 
@@ -109,24 +61,76 @@ void run(){
       std::cin >> choice;
 
       if (choice == 1) {
-        std::string url = "0";
-        std::cout << "Type in the URL: ";
-        std::cin >> url;
+        std::cout << List->isEmpty() << '\n';
 
       }
       else if (choice == 2)
       {
-
+        std::cout << "The length is " << List->getLength() << '\n';
       }
       else if (choice == 3)
       {
+        int num = 0;
+        std::cout << "Pick a number to be inserted: ";
+        std::cin>>num;
 
       }
       else if (choice == 4)
       {
 
       }
-      else if (choice >= 6)
+      else if (choice == 5)
+      {
+
+      }
+      else if (choice == 6)
+      {
+        int num = 0;
+        std::cout << '\n' << "Type in a number to find in the file: ";
+        std::cin >> num;
+        if (List->find(num) != nullptr) {
+          std::cout << num << " exists in the file" << '\n';
+        }else{
+          std::cout << num << " was not found" << '\n';
+        }
+      }
+      else if (choice == 7)
+      {
+        int num = 0;
+        std::cout << '\n' << "Type in a number to find in the file: ";
+        std::cin >> num;
+        if(!List->find(num)){
+          std::cout<<num << " is not found"<< '\n';
+
+        }
+        else if(List->findNext(num) != nullptr){
+         std::cout<<List->findNext(num)->getEntry() << " is after " << num << '\n';
+        }
+        else{
+          std::cout<< "nullptr is after " << num << '\n';
+        }
+
+      }
+      else if (choice == 8)
+      {
+          List->printAll();
+      }
+      else if (choice == 9)
+      {
+
+      }
+      else if (choice == 10)
+      {
+        int pos = 0;
+        std::cout << '\n' << "Type in a position to print the element: ";
+        std::cin >> pos;
+        List->printAt(pos);
+      }
+      else if (choice == 11)
+      {
+
+      }
+      else if (choice >= 12)
       {
         std::cout << "\nMake another choice" << '\n';
       }

@@ -18,7 +18,7 @@ class LinkedList
 {
 private:
   Node* m_front;
-  int m_length;
+  int m_length = 0;
   int m_position;
 
 public:
@@ -34,6 +34,42 @@ public:
   * @throw none
   **/
   ~LinkedList();
+  /* @pre none
+  * @post prints at a given position
+  * @param pos - position of list to be printed
+  * @throw none
+  **/
+  void printAt(int pos);
+  /* @pre none
+  * @post checks to see if an integer exists and then returns the next pointer
+  * @param point - integer from file
+  * @throw none
+  **/
+  Node* findNext(int num);
+  /* @pre none
+  * @post checks to see if an integer exists and returns that pointer
+  * @param point - integer from file
+  * @throw none
+  **/
+  Node* find(int point);
+  /* @pre none
+  * @post Adds a node to the front of the LinkedList
+  * @param point - integer from file
+  * @throw none
+  **/
+  void addFront(int point);
+  /* @pre none
+  * @post prints all the elements in reverse order
+  * @param none
+  * @throw none
+  **/
+  void printRev();
+  /* @pre none
+  * @post prints all the elements in a row
+  * @param none
+  * @throw none
+  **/
+  void printAll();
   /* @pre none
   * @post checks to see if the list is empty and returns true or false
   * @param none

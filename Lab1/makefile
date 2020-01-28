@@ -1,7 +1,7 @@
 exe: main.o Executive.o LinkedList.o Node.o
 	g++ -g -Wall main.o Executive.o LinkedList.o Node.o -o exe
 
-main.o: main.cpp Executive.cpp LinkedList.h LinkedList.cpp Node.h Node.cpp
+main.o: main.cpp
 	g++ -g -Wall -std=c++11 -c main.cpp
 
 Executive.o: Executive.cpp Executive.h

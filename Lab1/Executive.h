@@ -2,7 +2,6 @@
 @file Executive.h
 @date 9/19/2018
 @brief This file is the header file for the executive class.  Contains method declarations for the user menu
-
 */
 
 #ifndef EXECUTIVE_H
@@ -24,7 +23,7 @@ public:
   Executive(char* &data);
 
 
-  
+
   /**
   * @pre none
   * @post The user interface is run after the object is constructed

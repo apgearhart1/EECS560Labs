@@ -11,8 +11,15 @@ Node::Node(){
 
   m_entry = 0;
   m_next = nullptr;
+  m_first = false;
 }
 
+void Node::setFirst(bool check){
+  m_first = check;
+}
+bool Node::isFirst() const{
+  return m_first;
+}
 
 Node::Node(int entry){
 

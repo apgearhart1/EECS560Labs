@@ -23,7 +23,13 @@ LinkedList::~LinkedList()
 {
   clear();
 }
-
+bool LinkedList::ptrToBool(Node* node){
+  if(node == nullptr){
+    return true;
+  }else{
+    return false;
+  }
+}
 void LinkedList::printAt(int pos){
   if (pos == 1) {
     std::cout << m_front->getEntry() << " is at position " << pos << '\n';
@@ -36,6 +42,21 @@ void LinkedList::printAt(int pos){
     }
     std::cout << temp->getEntry() << " is at position " << pos << '\n';
   }
+}
+
+Node* LinkedList::findPrev(int point){
+  if(m_front == nullptr){
+    return nullptr;
+  }else if(find(point)){
+    Node* temp = m_front;
+    while (temp != nullptr) {
+      if (point == temp->getNext()->getEntry()) {
+        return temp;
+      }
+      temp = temp->getNext();
+    }
+  }
+  return nullptr;
 }
 
 Node* LinkedList::findNext(int point){
@@ -60,12 +81,12 @@ Node* LinkedList::find(int point){
   return nullptr;
 }
 
-void LinkedList::addFront(int point){
+void LinkedList::addFront(Node* node){
   if (m_front == nullptr) {
-    m_front = new Node(point);
+    m_front = node;
     m_front->setNext(nullptr);
   }else{
-    Node* temp = new Node(point);
+    Node* temp = node;
     temp->setNext(m_front);
     m_front = temp;
 
@@ -74,17 +95,13 @@ void LinkedList::addFront(int point){
 
 }
 
-void LinkedList::printRev(){
-  if (getLength() ==1) {
-    std::cout << m_front->getEntry() << '\n';
+void LinkedList::printRev(Node* front){
+  if (front == nullptr) {
+    return;
   }else{
-    Node* temp = m_front;
-    while(temp != nullptr) {
-      temp = temp->getNext();
-    }
-
+    printRev(front->getNext());
+    std::cout << front->getEntry() << " ";
   }
-  std::cout << '\n';
 }
 
 void LinkedList::printAll(){
@@ -155,15 +172,19 @@ void LinkedList::insert(int position, int entry) throw (std::runtime_error)
 }
 
 
-void LinkedList::removes(int position) throw(std::runtime_error)
+void LinkedList::removes(int value) throw(std::runtime_error)
 {
   Node* ptr = nullptr;
-  if (position == 1) {
+  if (m_front->getEntry() == value && m_front->isFirst()) {
     ptr = m_front;
     m_front = m_front->getNext();
   }
   else{
-    Node* prevPtr = getPtrAt(position-1);
+    ptr = m_front;
+    while (!ptr->isFirst() && value == ptr->getEntry()) {
+
+    }
+    Node* prevPtr = findPrev(value);
     ptr = prevPtr->getNext();
     prevPtr->setNext(ptr->getNext());
   }
@@ -227,11 +248,7 @@ void LinkedList::replace(int position, int newEntry) throw(std::runtime_error)
 
 void LinkedList::addBack(int entry) throw(std::runtime_error)
 {
-  //if(m_length < 1)
-//  {
-//    throw std::runtime_error("This list is empty");
-//  }
-//  else{
+
 
     if(m_length == 0)
     {

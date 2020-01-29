@@ -17,8 +17,21 @@ private:
 
   int m_entry;
   Node* m_next;
+  bool m_first;
 
 public:
+  /* @pre none
+  * @post sets the m_first variable to true/false as needed
+  * @param check - T/F variable to indicate the node is first or not
+  * @throw none
+  **/
+  void setFirst(bool check);
+  /* @pre none
+  * @post Returns true/false if this node is first to enter in the list
+  * @param none
+  * @throw none
+  **/
+  bool isFirst() const;
   /* @pre none
   * @post Returns the value at the current position
   * @param none

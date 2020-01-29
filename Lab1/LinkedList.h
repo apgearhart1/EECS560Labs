@@ -35,6 +35,18 @@ public:
   **/
   ~LinkedList();
   /* @pre none
+  * @post checks to see if a ptr to an int exists and returns true or false
+  * @param ptr - ptr to Node that is found in list
+  * @throw none
+  **/
+  bool ptrToBool(Node* ptr);
+  /* @pre none
+  * @post checks to see if an integer exists and then returns the previous pointer
+  * @param point - integer from file
+  * @throw none
+  **/
+  Node* findPrev(int point);
+  /* @pre none
   * @post prints at a given position
   * @param pos - position of list to be printed
   * @throw none
@@ -54,16 +66,16 @@ public:
   Node* find(int point);
   /* @pre none
   * @post Adds a node to the front of the LinkedList
-  * @param point - integer from file
+  * @param node - Node* from file with integer inside
   * @throw none
   **/
-  void addFront(int point);
+  void addFront(Node* node);
   /* @pre none
   * @post prints all the elements in reverse order
   * @param none
   * @throw none
   **/
-  void printRev();
+  void printRev(Node* front);
   /* @pre none
   * @post prints all the elements in a row
   * @param none

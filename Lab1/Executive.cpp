@@ -26,7 +26,14 @@ Executive::Executive(char* &data)
     if(myfile.eof()){
       break;
     }
-    List->addFront(point);
+
+    bool check = List->ptrToBool(List->find(point));
+    Node* ptr = new Node(point);
+    ptr->setFirst(check);
+    List->addFront(ptr);
+
+
+  
 
 
   }
@@ -73,11 +80,24 @@ void Executive::run(){
         int num = 0;
         std::cout << "Pick a number to be inserted: ";
         std::cin>>num;
+        bool check = List->ptrToBool(List->find(num));
+        Node* ptr = new Node(num);
+        ptr->setFirst(check);
+        List->addFront(ptr);
+        std::cout << num << " was added to the list" << '\n';
 
       }
       else if (choice == 4)
       {
-
+        int num = 0;
+        std::cout << "Pick a number to be Deleted: ";
+        std::cin>>num;
+        if (List->find(num)) {
+          List->removes(num);
+          std::cout << num << " has been removed" << '\n';
+        }else{
+          std::cout << "The number you typed in is not found" << '\n';
+        }
       }
       else if (choice == 5)
       {
@@ -117,7 +137,9 @@ void Executive::run(){
       }
       else if (choice == 9)
       {
-
+        std::cout << "\nList Printed in reverse" << '\n';
+        List->printRev(List->getFront());
+        std::cout << '\n';
       }
       else if (choice == 10)
       {
@@ -125,10 +147,6 @@ void Executive::run(){
         std::cout << '\n' << "Type in a position to print the element: ";
         std::cin >> pos;
         List->printAt(pos);
-      }
-      else if (choice == 11)
-      {
-
       }
       else if (choice >= 12)
       {

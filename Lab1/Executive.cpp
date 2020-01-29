@@ -26,14 +26,14 @@ Executive::Executive(char* &data)
     if(myfile.eof()){
       break;
     }
-
-    bool check = List->ptrToBool(List->find(point));
     Node* ptr = new Node(point);
+    bool check = List->ptrToBool(List->find(point));
+
     ptr->setFirst(check);
     List->addFront(ptr);
 
 
-  
+
 
 
   }

@@ -42,10 +42,10 @@ public:
   bool ptrToBool(Node* ptr);
   /* @pre none
   * @post checks to see if an integer exists and then returns the previous pointer
-  * @param point - integer from file
+  * @param node - node of integer from file
   * @throw none
   **/
-  Node* findPrev(int point);
+  Node* findPrev(Node* node);
   /* @pre none
   * @post prints at a given position
   * @param pos - position of list to be printed

@@ -44,13 +44,13 @@ void LinkedList::printAt(int pos){
   }
 }
 
-Node* LinkedList::findPrev(int point){
+Node* LinkedList::findPrev(Node* node){
   if(m_front == nullptr){
     return nullptr;
-  }else if(find(point)){
+  }else if(find(node->getEntry())){
     Node* temp = m_front;
     while (temp != nullptr) {
-      if (point == temp->getNext()->getEntry()) {
+      if (node->getEntry() == temp->getNext()->getEntry()) {
         return temp;
       }
       temp = temp->getNext();
@@ -181,12 +181,16 @@ void LinkedList::removes(int value) throw(std::runtime_error)
   }
   else{
     ptr = m_front;
-    while (!ptr->isFirst() && value == ptr->getEntry()) {
+    while (ptr != nullptr) {
+      if (value == ptr->getEntry() && ptr->isFirst()) {
 
+        Node* prevPtr = findPrev(ptr);
+        ptr = prevPtr->getNext();
+        prevPtr->setNext(ptr->getNext());
+        break;
+      }
+      ptr = ptr->getNext();
     }
-    Node* prevPtr = findPrev(value);
-    ptr = prevPtr->getNext();
-    prevPtr->setNext(ptr->getNext());
   }
   ptr->setNext(nullptr);
   delete ptr;

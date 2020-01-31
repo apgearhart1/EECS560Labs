@@ -59,6 +59,12 @@ public:
   **/
   Node* findNext(int num);
   /* @pre none
+  * @post finds a node at a location and returns that pointer
+  * @param point - integer from file
+  * @throw none
+  **/
+  Node* findAt(int position);
+  /* @pre none
   * @post checks to see if an integer exists and returns that pointer
   * @param point - integer from file
   * @throw none

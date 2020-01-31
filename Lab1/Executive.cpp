@@ -27,9 +27,9 @@ Executive::Executive(char* &data)
       break;
     }
     Node* ptr = new Node(point);
-    bool check = List->ptrToBool(List->find(point));
 
-    ptr->setFirst(check);
+
+
     List->addFront(ptr);
 
 
@@ -68,7 +68,12 @@ void Executive::run(){
       std::cin >> choice;
 
       if (choice == 1) {
-        std::cout << List->isEmpty() << '\n';
+        if (List->isEmpty()) {
+          std::cout << "List is empty" << '\n';
+        }
+        else{
+          std::cout << "List is not empty" << '\n';
+        }
 
       }
       else if (choice == 2)

@@ -37,7 +37,7 @@ void LinkedList::printAt(int pos){
     std::cout << pos << " exceeds length of List" << '\n';
   }else{
     Node* temp = m_front;
-    for (int i = 1; i <= pos; i++) {
+    for (int i = 1; i < pos; i++) {
       temp = temp->getNext();
     }
     std::cout << temp->getEntry() << " is at position " << pos << '\n';
@@ -61,6 +61,20 @@ Node* LinkedList::findPrev(Node* node){
 
 Node* LinkedList::findNext(int point){
   return find(point)->getNext();
+}
+
+Node* LinkedList::findAt(int position){
+  if(m_front == nullptr){
+    return nullptr;
+  }
+  else{
+    Node* temp = m_front;
+    for(int i = 1; i < position; i++) {
+      temp = temp->getNext();
+    }
+    return temp;
+  }
+
 }
 
 Node* LinkedList::find(int point){
@@ -175,21 +189,24 @@ void LinkedList::insert(int position, int entry) throw (std::runtime_error)
 void LinkedList::removes(int value) throw(std::runtime_error)
 {
   Node* ptr = nullptr;
-  if (m_front->getEntry() == value && m_front->isFirst()) {
+  if (m_front->getEntry() == value) {
     ptr = m_front;
     m_front = m_front->getNext();
   }
   else{
-    ptr = m_front;
-    while (ptr != nullptr) {
-      if (value == ptr->getEntry() && ptr->isFirst()) {
 
+
+    int k = getLength();
+    for(k; k > 0; k--){
+      if (value == getEntry(k)) {
+        ptr = findAt(k);
+        std::cout << ptr->getEntry() << '\n';
         Node* prevPtr = findPrev(ptr);
         ptr = prevPtr->getNext();
         prevPtr->setNext(ptr->getNext());
         break;
       }
-      ptr = ptr->getNext();
+
     }
   }
   ptr->setNext(nullptr);
@@ -225,9 +242,12 @@ int LinkedList::getEntry(int position) const throw(std::runtime_error)
 
   else{
     Node* temp = m_front;
-    for (int i = 0; i <= position-1; i++) {
+    std::cout << "k" << '\n';
+    for (int i = 1; i < position; i++) {
+
       temp = temp->getNext();
     }
+    std::cout << "k" << '\n';
     int entry = temp->getEntry();
     return(entry);
   }
@@ -312,6 +332,7 @@ Node* LinkedList::getPtrAt(int position)
 {
   Node* currentPtr = m_front;
   for (int i = 1; i < position; i++) {
+    std::cout << i << '\n';
     currentPtr = currentPtr->getNext();
   }
   return(currentPtr);

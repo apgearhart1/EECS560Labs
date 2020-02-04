@@ -9,7 +9,7 @@
 #include "Node.h"
 #include <string>
 #include <iostream>
-#include "LinkedList.h"
+//#include "LinkedList.h"
 
 
 class Executive
@@ -36,12 +36,14 @@ public:
   */
   void run();
 
+
+
 private:
   //Node<T>* history;
-  //void interact();
-  int position;
-  LinkedList* List;
-  int size;
+  //void interact
+  //LinkedList* List
+  int bucketSize;
+  Node** arr;
 
 
 };

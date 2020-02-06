@@ -36,6 +36,18 @@ public:
   */
   void run();
 
+  /**
+  * @pre none
+  * @post Hashes and adds new record to the hashtable
+  * @param ptr - pointer to node record
+  */
+  void addRecord(Node* ptr, int newHash);
+  /**
+  * @pre none
+  * @post Prints the contents in the table
+  * @param none
+  */
+  void printTable();
 
 
 private:

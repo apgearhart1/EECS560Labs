@@ -26,8 +26,14 @@ Executive::Executive(char* &data)
   for (int i = 0; i < bucketSize; i++) {
     arr[i] = new Node();
   }
-  //List = new LinkedList();
-  while (std::getline(myfile, name, ',')) {
+  myfile>>name;
+  name = name.substr(0, name.size()-1);
+  myfile>>goals;
+  Node* ptr = new Node(name, goals);
+  int newHash = goals % bucketSize;
+  arr[newHash]->setNext(ptr);
+  std::cout << arr[newHash]->getNext()->getEntry() << '\n';
+  while(std::getline(myfile, name, ',')){
     myfile>>name;
     name = name.substr(0, name.size()-1);
     myfile>>goals;
@@ -65,6 +71,32 @@ int Executive::checkInput(std::string input){
     return stoi(input);
 }
 
+void Executive::addRecord(Node* ptr, int newHash){
+  if (arr[newHash]->getNext() == nullptr) {
+    std::cout << "empty" << '\n';
+    arr[newHash]->setNext(ptr);
+    std::cout << arr[newHash]->getNext()->getEntry() << '\n';
+  }else{
+    while (arr[newHash]->getNext() != nullptr) {
+      arr[newHash] = arr[newHash]->getNext();
+    }
+    arr[newHash]->setNext(ptr);
+    std::cout << arr[newHash]->getNext()->getEntry() << '\n';
+  }
+
+}
+
+void Executive::printTable(){
+  for (int i = 0; i < bucketSize; i++) {
+    while (arr[i]->getNext() != nullptr) {
+      std::cout << arr[i]->getNext()->getEntry() << " -> ";
+      arr[i] = arr[i]->getNext();
+    }
+    std::cout << '\n';
+  }
+
+}
+
 void Executive::run(){
 
     std::string choice = "0";
@@ -87,6 +119,17 @@ void Executive::run(){
       std::cin >> choice;
       int finalChoice = checkInput(choice);
       if (finalChoice == 1) {
+        std::string name = "0";
+        int goal = 0;
+        std::cout << "===============================================================" << '\n';
+        std::cout << "===============================================================" << '\n';
+        std::cout << "Type in the name of the player you would like to enter: ";
+        std::cin >> name;
+        std::cout << '\n' << "Type in the number of the goals the above player has: ";
+        std::cin >> goal;
+        Node* ptr = new Node(name, goal);
+        int newHash = goal % bucketSize;
+        addRecord(ptr, newHash);
 
       }
       else if (finalChoice == 2)
@@ -96,7 +139,7 @@ void Executive::run(){
       else if (finalChoice == 3)
       {
 
-
+          printTable();
       }
       else if (finalChoice == 4)
       {
